@@ -10,16 +10,20 @@ export default function FloatingParticles() {
     if (!canvas) return
 
     const ctx = canvas.getContext('2d')
-    if (!ctx) return  // <-- this is the fix: check for null
+    if (!ctx) return
 
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
+    // Capture non‑null references for safe use inside animate()
+    const canvasSafe = canvas
+    const ctxSafe = ctx
+
+    canvasSafe.width = window.innerWidth
+    canvasSafe.height = window.innerHeight
 
     const particles: { x: number; y: number; radius: number; alpha: number; vx: number; vy: number }[] = []
     for (let i = 0; i < 80; i++) {
       particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
+        x: Math.random() * canvasSafe.width,
+        y: Math.random() * canvasSafe.height,
         radius: Math.random() * 2 + 1,
         alpha: Math.random() * 0.5,
         vx: (Math.random() - 0.5) * 0.3,
@@ -28,19 +32,19 @@ export default function FloatingParticles() {
     }
 
     function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      ctxSafe.clearRect(0, 0, canvasSafe.width, canvasSafe.height)
       particles.forEach(p => {
         p.x += p.vx
         p.y += p.vy
-        if (p.x < 0) p.x = canvas.width
-        if (p.x > canvas.width) p.x = 0
-        if (p.y < 0) p.y = canvas.height
-        if (p.y > canvas.height) p.y = 0
+        if (p.x < 0) p.x = canvasSafe.width
+        if (p.x > canvasSafe.width) p.x = 0
+        if (p.y < 0) p.y = canvasSafe.height
+        if (p.y > canvasSafe.height) p.y = 0
 
-        ctx.beginPath()
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(0, 180, 216, ${p.alpha})`
-        ctx.fill()
+        ctxSafe.beginPath()
+        ctxSafe.arc(p.x, p.y, p.radius, 0, Math.PI * 2)
+        ctxSafe.fillStyle = `rgba(0, 180, 216, ${p.alpha})`
+        ctxSafe.fill()
       })
       requestAnimationFrame(animate)
     }
@@ -48,8 +52,8 @@ export default function FloatingParticles() {
     animate()
 
     const handleResize = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
+      canvasSafe.width = window.innerWidth
+      canvasSafe.height = window.innerHeight
     }
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
