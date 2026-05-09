@@ -1,0 +1,44 @@
+import type { Metadata } from 'next'
+import { Inter, Poppins } from 'next/font/google'
+import './globals.css'
+import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
+import { AuthProvider } from '@/contexts/AuthContext'
+import FloatingParticles from '@/components/FloatingParticles'
+import WhatsAppButton from '@/components/WhatsAppButton'
+import ChatBot from '@/components/ChatBot'
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const poppins = Poppins({ 
+  weight: ['400', '500', '600', '700', '800'],
+  subsets: ['latin'],
+  variable: '--font-poppins'
+})
+
+export const metadata: Metadata = {
+  title: 'MAGPIE & CO | Business Compliance Meets Digital Innovation',
+  description: 'Premium financial consulting, government compliance, business automation, and digital transformation solutions for enterprises.',
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en" className="dark">
+      <body className={`${inter.variable} ${poppins.variable} font-sans`}>
+        <AuthProvider>
+          <Navbar />
+          <main className="relative overflow-x-hidden">
+            {children}
+          </main>
+          <Footer />
+          <FloatingParticles />
+          <WhatsAppButton />
+          <ChatBot />
+        </AuthProvider>
+      </body>
+    </html>
+  )
+}
