@@ -7,6 +7,7 @@ import { AuthProvider } from '@/contexts/AuthContext'
 import FloatingParticles from '@/components/FloatingParticles'
 import WhatsAppButton from '@/components/WhatsAppButton'
 import ChatBot from '@/components/ChatBot'
+import WelcomeModal from '@/components/WelcomeModal'
 
 const montserrat = Montserrat({
   weight: ['400', '500', '600', '700', '800'],
@@ -36,6 +37,7 @@ export default function RootLayout({
           <FloatingParticles />
           <WhatsAppButton />
           <ChatBot />
+          <WelcomeModal />
         </AuthProvider>
       </body>
     </html>
