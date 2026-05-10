@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, Poppins } from 'next/font/google'
+import { Montserrat } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
@@ -8,11 +8,10 @@ import FloatingParticles from '@/components/FloatingParticles'
 import WhatsAppButton from '@/components/WhatsAppButton'
 import ChatBot from '@/components/ChatBot'
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
-const poppins = Poppins({ 
+const montserrat = Montserrat({
   weight: ['400', '500', '600', '700', '800'],
   subsets: ['latin'],
-  variable: '--font-poppins'
+  variable: '--font-montserrat',
 })
 
 export const metadata: Metadata = {
@@ -27,7 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.variable} ${poppins.variable} font-sans`}>
+      <body className={`${montserrat.variable} font-sans`}>
         <AuthProvider>
           <Navbar />
           <main className="relative overflow-x-hidden">
