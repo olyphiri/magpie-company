@@ -9,6 +9,7 @@ import ThemeToggle from './ThemeToggle'
 const navLinks = [
   { name: 'Home', href: '/' },
   { name: 'About', href: '/about' },
+  { name: 'Consulting', href: '/consulting' },           // ✅ NEW LINK
   { name: 'Finance & Compliance', href: '/finance-compliance' },
   { name: 'Technology Solutions', href: '/technology-solutions' },
   { name: 'Business Automation', href: '/business-automation' },
